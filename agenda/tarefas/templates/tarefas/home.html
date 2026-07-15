@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Agenda Digital</title>
+</head>
+<body>
+    
+    <h1>Minha Agenda</h1>
+
+    <h2>Adicionar Tarefa</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Adicionar</button>
+    </form>
+
+    <h3>Filtrar</h3>
+
+    <a href="/">Todas</a> |
+    <a href="/?status=pendentes">Pendentes</a> | 
+    <a href="/?status=concluidas">Concluídas</a> 
+
+    <br><br>
+
+    <h2>Lista de Tarefas</h2>
+
+    <ul>
+        {% for tarefa in tarefas%}
+            <li>
+                <strong>{{ tarefa.titulo }}</strong><br>
+                {{ tarefa.descricao }}<br>
+                Data: {{ tarefa.data|date:"d/m/Y" }}<br>
+                Horário: {{ tarefa.horario|time:"H:i" }}<br>
+                prioridade:
+                {{ tarefa.prioridade }}<br>
+
+                Status:
+                {% if tarefa.concluida %}
+                    Concluida👌
+                {% else %}
+                    Pendente ⏱️
+                {% endif %}
+
+                <a href="{% url 'editar_tarefa' tarefa.id %}">
+                    Editar
+                </a>
+                <a href="{% url 'excluir_tarefa' tarefa.id %}">
+                    Excluir
+                </a>
+
+                <a href="{% url 'concluir_tarefa' tarefa.id %}">
+                    Concluir
+                </a>
+            </li>
+        {% empty %}
+            <li>Nenhuma tarefa cadastrada.</li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
