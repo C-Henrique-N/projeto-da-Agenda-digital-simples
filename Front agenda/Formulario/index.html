@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lembretes</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <form>
+
+            <div class="topo">
+
+                <div class="esquerda">
+
+                    <label>Lembrete</label>
+                    <input type="text" placeholder="Digite o lembrete">
+
+                    <div class="horario">
+                        <label>Horário:</label>
+                        <input type="time">
+                    </div>
+
+                </div>
+
+                <div class="direita">
+
+                    <input type="date">
+
+                </div>
+
+            </div>
+
+            <div class="prioridades">
+
+                <input type="radio" id="baixa" name="prioridade" value="Baixa" checked>
+                <label for="baixa" class="verde">Baixa</label>
+
+                <input type="radio" id="media" name="prioridade" value="Média">
+                <label for="media" class="azul">Média</label>
+
+                <input type="radio" id="alta" name="prioridade" value="Alta">
+                <label for="alta" class="laranja">Alta</label>
+
+                <input type="radio" id="urgente" name="prioridade" value="Urgente">
+                <label for="urgente" class="vermelho">Urgente</label>
+
+            </div>
+
+            <button type="submit" class="botao">
+                Adicionar
+            </button>
+
+        </form>
+
+    </div>
+
+</body>
+</html>
