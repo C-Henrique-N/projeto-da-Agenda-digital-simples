@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro</title>
+</head>
+<body>
+
+    <h1>criar uma conta</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <p>
+            <label for="{{ form.username.id_for_label }}">Nome do usuário</label><br>
+            {{ form.username }}
+        </p>
+
+        <p>
+            <label for="{{ form.password1.id_for_label }}">Senha</label><br>
+            {{ form.password1 }}
+        </p>
+
+        <p>
+            <label for="{{ form.form.password2.id_for_label.id_for_label }}">confirme a senha</label><br>
+            {{ form.password2 }}
+        </p>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <p>"você já possuí uma conta?</p>
+    <a href="{% url 'login' %}">Entrar</a>
+</body>
+</html>
