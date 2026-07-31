@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
 from .models import Tarefa
 from .forms import TarefaForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LoginView
 
+@login_required
 def home(request):
     if request.method == "POST":
         form = TarefaForm(request.POST)
@@ -48,3 +51,6 @@ def editar_tarefa(request, id):
         form = TarefaForm(instance=tarefa)
     
     return render(request, "tarefas/home.html", {"form": form, "tarefas": Tarefa.objects.all()    })
+
+class LoginUsuario(LoginView):
+    template_name = "tarefas/login.html"

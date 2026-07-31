@@ -10,6 +10,17 @@
 
     <h2>Adicionar Tarefa</h2>
 
+    <p>
+        <div align="right">
+        Olá, {{ user.username }} |
+
+            <form action="{% url 'logout' %}" method="POST" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">sair</button>
+            </form>
+        </div>
+    </p>
+
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
