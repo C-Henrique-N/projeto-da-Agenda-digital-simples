@@ -1,74 +1,106 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <title>Agenda Digital</title>
+    <link rel="stylesheet" href="{% static 'tarefas/style.css' %}">
 </head>
 <body>
-    
-    <h1>Minha Agenda</h1>
-
-    <h2>Adicionar Tarefa</h2>
-
-    <p>
-        <div align="right">
-        Olá, {{ user.username }} |
-
-            <form action="{% url 'logout' %}" method="POST" style="display:inline;">
-                {% csrf_token %}
-                <button type="submit">sair</button>
-            </form>
+    <div class="conteudo">
+        <h1>Minha Agenda</h1>
+        <div class="filtro">
+        <h3>Filtrar</h3>
+            <div class="links">
+                <a href="/">Todas</a>
+                <a href="/?status=pendentes">Pendentes</a>
+                <a href="/?status=concluidas">Concluídas</a>
+            </div>
         </div>
-    </p>
+    </div>
+    
+    <div class="container">
+    <h2>Adicionar Tarefa</h2>
+        <div class="form">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="linha">
+                <div class="campo grande">
+                {{ form.titulo.label_tag }}
+                {{ form.titulo }}
+                </div>
+                <div class="campo pequeno">
+                {{ form.data.label_tag }}
+                {{ form.data }}
+                </div>
+                <div class="campo pequeno">
+                {{ form.horario.label_tag }}
+                {{ form.horario}}
+                </div>
+            </div>
+            <h3>Prioridade:</h3>
+            <div class="prioridades">
 
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Adicionar</button>
-    </form>
+                <input type="radio" id="baixa" name="prioridade" value="baixa" checked>
+                <label for="baixa" class="verde">Baixa</label>
+                <input type="radio" id="media" name="prioridade" value="média">
+                <label for="media" class="azul">Média</label>
+                <input type="radio" id="alta" name="prioridade" value="alta">
+                <label for="alta" class="laranja">Alta</label>
+                <input type="radio" id="urgente" name="prioridade" value="urgente">
+                <label for="urgente" class="vermelho">Urgente</label>
+            
+            </div>
+          
+          <button type="submit" class="botao">Adicionar</button>
+        </form>
+        </div>
+    </div>
+    
+    <h2 class="titulo-da-lista">Lista de Tarefas:</h2>
 
-    <h3>Filtrar</h3>
-
-    <a href="/">Todas</a> |
-    <a href="/?status=pendentes">Pendentes</a> | 
-    <a href="/?status=concluidas">Concluídas</a> 
-
-    <br><br>
-
-    <h2>Lista de Tarefas</h2>
-
-    <ul>
+    <div class="cards">
         {% for tarefa in tarefas%}
-            <li>
-                <strong>{{ tarefa.titulo }}</strong><br>
-                {{ tarefa.descricao }}<br>
-                Data: {{ tarefa.data|date:"d/m/Y" }}<br>
-                Horário: {{ tarefa.horario|time:"H:i" }}<br>
-                prioridade:
-                {{ tarefa.prioridade }}<br>
+            <div class="card {{ tarefa.prioridade}}">
+                
+                <div class="lado">
+                    <h2>Data: {{ tarefa.data|date:"d/m/Y" }}</h2>
+                    <p>Horário: {{ tarefa.horario|time:"H:i" }}</p>
+                </div>
+                
+                <div class="card-conteudo">
+                    
+                    <h2>{{ tarefa.titulo }}</h2>
+                    
+                    <span>prioridade: {{ tarefa.prioridade }}</span>
+                
+                <span>
+                    Status:
+                    {% if tarefa.concluida %}
+                        Concluida👌
+                    {% else %}
+                        Pendente ⏱️
+                    {% endif %}
+                </span>
+                    <div class="acoes">
+                    <a href="{% url 'editar_tarefa' tarefa.id %}">
+                        Editar
+                    </a>
+                    <a href="{% url 'excluir_tarefa' tarefa.id %}">
+                        Excluir
+                    </a>
 
-                Status:
-                {% if tarefa.concluida %}
-                    Concluida👌
-                {% else %}
-                    Pendente ⏱️
-                {% endif %}
-
-                <a href="{% url 'editar_tarefa' tarefa.id %}">
-                    Editar
-                </a>
-                <a href="{% url 'excluir_tarefa' tarefa.id %}">
-                    Excluir
-                </a>
-
-                <a href="{% url 'concluir_tarefa' tarefa.id %}">
-                    Concluir
-                </a>
-            </li>
+                    <a href="{% url 'concluir_tarefa' tarefa.id %}">
+                        Concluir
+                    </a>
+                    </div>
+                </div>
+            </div>
         {% empty %}
-            <li>Nenhuma tarefa cadastrada.</li>
+            <p class="sem-tarefas">
+            Nenhuma tarefa cadastrada. 😑
+            </p>
         {% endfor %}
-    </ul>
-
+    </div>
 </body>
 </html>
