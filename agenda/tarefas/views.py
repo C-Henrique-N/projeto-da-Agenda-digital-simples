@@ -3,7 +3,7 @@ from .models import Tarefa
 from .forms import TarefaForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
-from django.contrib.auth.forms import UserCreationForm
+from .forms import TarefaForm, CadastroForm
 from django.contrib.auth import login
 
 @login_required
@@ -56,16 +56,17 @@ def editar_tarefa(request, id):
 
 class LoginUsuario(LoginView):
     template_name = "tarefas/login.html"
-
+    redirect_authenticated_user = True
+    
 def cadastro(request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = CadastroForm(request.POST)
 
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect("home")
     else:
-        form =UserCreationForm()
+        form = CadastroForm()
 
-    return render(request, "tarefas/cadastro.html", {"form" : form})
+    return render(request, "tarefas/cadastro.html", {"form": form})

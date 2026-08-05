@@ -1,35 +1,60 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
+
+    <link rel="stylesheet" href="{% static 'tarefas/cadastro.css' %}">
 </head>
 <body>
 
-    <h1>criar uma conta</h1>
+<div class="container">
 
-    <form method="POST">
-        {% csrf_token %}
+    <header class="header">
 
-        <p>
-            <label for="{{ form.username.id_for_label }}">Nome do usuário</label><br>
+        <span class="circle c1"></span>
+        <span class="circle c2"></span>
+        <span class="circle c3"></span>
+        <span class="circle c4"></span>
+        <span class="circle c5"></span>
+        <span class="circle c6"></span>
+
+        <img src="{% static 'tarefas/img/logo.png' %}" alt="Logo">
+
+    </header>
+
+    <main class="card">
+
+        <h1>Criar uma Conta</h1>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <label>Nome do usuário</label>
             {{ form.username }}
-        </p>
 
-        <p>
-            <label for="{{ form.password1.id_for_label }}">Senha</label><br>
+            <label>Senha</label>
             {{ form.password1 }}
-        </p>
 
-        <p>
-            <label for="{{ form.form.password2.id_for_label.id_for_label }}">confirme a senha</label><br>
+            <label>Confirmar senha</label>
             {{ form.password2 }}
+
+            <button type="submit">
+                Cadastrar
+            </button>
+
+        </form>
+
+        <p class="login">
+            Você já possui uma conta?
+            <a href="{% url 'login' %}">Entrar</a>
         </p>
 
-        <button type="submit">Cadastrar</button>
-    </form>
+    </main>
 
-    <p>"você já possuí uma conta?</p>
-    <a href="{% url 'login' %}">Entrar</a>
+</div>
+
 </body>
 </html>

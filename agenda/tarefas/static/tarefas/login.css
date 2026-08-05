@@ -1,0 +1,230 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background: #56d681;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:20px;
+}
+
+/* Container principal */
+.container{
+    width:100%;
+    max-width:400px;
+    background:#32fa2b;
+    border-radius:30px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+/* Parte superior */
+.topo{
+    height:280px;
+    background:#1d2221;
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+/* Logo */
+.logo{
+    width:120px;
+    max-width:35%;
+    z-index:2;
+}
+
+/* Bolinhas */
+.bolinha{
+    position:absolute;
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    background:#32436d;
+    opacity:.7;
+}
+
+.b1{top:20px;left:20px;}
+.b2{top:20px;right:20px;}
+.b3{top:90px;left:60px;}
+.b4{top:110px;right:40px;}
+.b5{bottom:25px;left:110px;}
+.b6{bottom:10px;right:90px;}
+
+/* Card */
+.login{
+    background:#fff;
+    margin-top:-35px;
+    border-radius:60px 0 0 0;
+    padding:45px 35px;
+}
+
+.login h1{
+    text-align:center;
+    font-size:48px;
+    color:#222;
+    margin-bottom:40px;
+}
+
+label{
+    display:block;
+    margin-bottom:6px;
+    color:#999;
+    font-size:12px;
+    letter-spacing:2px;
+}
+
+input{
+    width:100%;
+    height:45px;
+    border:none;
+    border-radius:12px;
+    background:#d9d9d9;
+    padding:0 15px;
+    margin-bottom:20px;
+    font-size:15px;
+    outline:none;
+}
+
+button{
+    width:100%;
+    height:45px;
+    border:none;
+    border-radius:8px;
+    background:#7a0000;
+    color:#fff;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    background:#a00000;
+}
+
+/* ========================= */
+/* Tablet */
+/* ========================= */
+
+@media (max-width:768px){
+
+    .container{
+        max-width:360px;
+    }
+
+    .topo{
+        height:240px;
+    }
+
+    .login{
+        padding:40px 30px;
+    }
+
+    .login h1{
+        font-size:40px;
+    }
+
+}
+
+/* ========================= */
+/* Celular */
+/* ========================= */
+
+@media (max-width:480px){
+
+    body{
+        padding:0;
+        background:#fff;
+    }
+
+    .container{
+        width:100%;
+        max-width:none;
+        min-height:100vh;
+        border-radius:0;
+        box-shadow:none;
+    }
+
+    .topo{
+        height:220px;
+    }
+
+    .logo{
+        width:100px;
+    }
+
+    .login{
+        margin-top:-25px;
+        border-radius:45px 0 0 0;
+        padding:35px 25px;
+    }
+
+    .login h1{
+        font-size:36px;
+        margin-bottom:30px;
+    }
+
+    input{
+        height:42px;
+    }
+
+    button{
+        height:42px;
+    }
+
+}
+
+/* ========================= */
+/* Computadores grandes */
+/* ========================= */
+
+@media (min-width:1200px){
+
+    .container{
+        max-width:430px;
+    }
+
+}
+
+input{
+    width:100%;
+    height:45px;
+    border:none;
+    border-radius:12px;
+    background:#d9d9d9;
+    padding:0 15px;
+    margin-bottom:20px;
+    font-size:15px;
+    outline:none;
+}
+
+input:focus{
+    background:#ececec;
+    border:2px solid #7a0000;
+}
+
+a{
+    display:block;
+    margin-top:10px;
+    text-align:center;
+    text-decoration:none;
+    color:#7a0000;
+    font-weight:bold;
+}
+
+a:hover{
+    color:#a00000;
+}
+
+button{
+    margin-top:15px;
+}

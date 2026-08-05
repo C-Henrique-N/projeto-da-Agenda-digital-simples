@@ -19,7 +19,21 @@
         </div>
     </div>
     
-    <div class="container">
+    <div class="logout-form">
+
+    <span class="usuario">
+        👤 {{ user.username }}
+    </span>
+
+    <form action="{% url 'logout' %}" method="POST">
+        {% csrf_token %}
+        <button class="btn-sair" type="submit">
+            🚪 Sair
+        </button>
+    </form>
+
+    </div>
+        <div class="container">
     <h2>Adicionar Tarefa</h2>
         <div class="form">
         <form method="POST">
@@ -51,55 +65,69 @@
                 <label for="urgente" class="vermelho">Urgente</label>
             
             </div>
-          
-          <button type="submit" class="botao">Adicionar</button>
+
+            <button type="submit" class="botao">
+                Adicionar
+            </button>
+
         </form>
-        </div>
+
     </div>
     
     <h2 class="titulo-da-lista">Lista de Tarefas:</h2>
 
     <div class="cards">
-        {% for tarefa in tarefas%}
-            <div class="card {{ tarefa.prioridade}}">
-                
-                <div class="lado">
-                    <h2>Data: {{ tarefa.data|date:"d/m/Y" }}</h2>
-                    <p>Horário: {{ tarefa.horario|time:"H:i" }}</p>
-                </div>
-                
-                <div class="card-conteudo">
-                    
-                    <h2>{{ tarefa.titulo }}</h2>
-                    
-                    <span>prioridade: {{ tarefa.prioridade }}</span>
-                
+    {% for tarefa in tarefas %}
+
+        <div class="card {{ tarefa.prioridade }}">
+
+            <div class="lado">
+                <h2>{{ tarefa.data|date:"d/m" }}</h2>
+                <p>{{ tarefa.horario|time:"H:i" }}</p>
+            </div>
+
+            <div class="card-conteudo">
+
+                <h2>{{ tarefa.titulo }}</h2>
+
+                {% if tarefa.descricao %}
+                <p>{{ tarefa.descricao }}</p>
+                {% endif %}
+
                 <span>
-                    Status:
+                    Prioridade:
+                    <strong>{{ tarefa.prioridade|title }}</strong>
+                </span>
+
+                <span>
                     {% if tarefa.concluida %}
-                        Concluida👌
+                        ✅ Concluída
                     {% else %}
-                        Pendente ⏱️
+                        ⏱️ Pendente
                     {% endif %}
                 </span>
-                    <div class="acoes">
-                    <a href="{% url 'editar_tarefa' tarefa.id %}">
-                        Editar
-                    </a>
-                    <a href="{% url 'excluir_tarefa' tarefa.id %}">
-                        Excluir
-                    </a>
 
+                <div class="acoes">
+                    <a href="{% url 'editar_tarefa' tarefa.id %}">✏️ Editar</a>
+                    <a href="{% url 'excluir_tarefa' tarefa.id %}">🗑 Excluir</a>
+
+                    {% if not tarefa.concluida %}
                     <a href="{% url 'concluir_tarefa' tarefa.id %}">
-                        Concluir
+                        ✔ Concluir
                     </a>
-                    </div>
+                    {% endif %}
                 </div>
+
             </div>
+
+        </div>
+
         {% empty %}
-            <p class="sem-tarefas">
-            Nenhuma tarefa cadastrada. 😑
-            </p>
+
+        <p class="sem-tarefas">
+            Nenhuma tarefa cadastrada 😄
+        </p>
+
         {% endfor %}
     </div>
 </body>
